@@ -1,6 +1,67 @@
-﻿//Fazer um programa que
-// O usuario insira que
-// Uma palavra secreta 
+﻿using System;
+class JogoAdivinhacao
+{
+    private string palavraSecreta;
+    private int tentativasMaximas;
+    private int tentativas;
+
+    public JogoAdivinhacao(string palavraSecreta, int tentativasMaximas)
+    {
+        this.palavraSecreta = palavraSecreta.ToLower();
+        this.tentativasMaximas = tentativasMaximas;
+        this.tentativas = 0;
+    }
+
+    public void Jogar()
+    {
+        Console.WriteLine("Bem-vindo ao jogo de adivinhação!");
+        Console.WriteLine("Tente adivinhar a palavra secreta.");
+
+        while (tentativas < tentativasMaximas)
+        {
+            Console.Write("Digite o seu palpite: ");
+            string palpite = Console.ReadLine().ToLower();
+
+            tentativas++;
+
+            if (palpite == palavraSecreta)
+            {
+                Console.WriteLine($"Parabéns! Você acertou a palavra secreta '{palavraSecreta}'.");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Palavra incorreta. Tente novamente.");
+            }
+        }
+
+        Console.WriteLine($"Suas {tentativasMaximas} tentativas acabaram. A palavra secreta era '{palavraSecreta}'.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Digite a palavra secreta: ");
+        string palavraSecreta = Console.ReadLine();
+
+        Console.Write("Digite o número máximo de tentativas: ");
+        int tentativasMaximas;
+        while (!int.TryParse(Console.ReadLine(), out tentativasMaximas) || tentativasMaximas <= 0)
+        {
+            Console.WriteLine("Número inválido. Digite novamente:");
+        }
+
+        JogoAdivinhacao jogo = new JogoAdivinhacao(palavraSecreta, tentativasMaximas);
+        jogo.Jogar();
+    }
+}
+
+
+
+//Fazer um programa que
+// O usuario insira uma palavra secreta 
 // terá 5 tentativas para adivinhar a palavra secreta = int
 // Deve aparecer na tela ao usuario as opções
 // Digite a palavra secreta ( palavra que deve ser advinhada)= String
